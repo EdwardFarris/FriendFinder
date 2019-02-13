@@ -24,11 +24,11 @@ _____
 ### **Demo Screenshots**
 #####FriendFinder
 * This is what the home-page looks like!
-![FriendFinder](images/home.png)
+![FriendFinder](public/images/home.png)
 * This is what the survey page looks like!
-![FriendFinder](images/survey.png)
+![FriendFinder](public/images/survey.png)
 * This is what the match modal displays!
-![FriendFinder](images/survey.png)
+![FriendFinder](public/images/match.png)
 _________
 ### **Technologies Used**
 * Node.js
