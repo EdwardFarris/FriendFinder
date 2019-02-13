@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+
+
 </head>
 
 <body>
@@ -145,11 +147,13 @@
 
         <br>
         <br>
-        <button type="submit" id="submitBtn" class="btn btn-primary btn-lg btn-block">Submit Response and Find a Match!</button>
+        <button type="submit" id="submitBtn" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="myModal">Submit
+            Response and Find a Match!</button>
 
         <footer class="footer">
             <div class="container">
-                <p><a href="/api/friendsList">API Friends List</a> | <a href="/api/GitHub">GitHub Repo</a>
+                <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/EdwardFarris/FriendFinder"
+                        target="_blank">GitHub Repo</a>
             </div>
         </footer>
 
@@ -177,82 +181,79 @@
         </div>
     </div>
     <script type="text/javascript">
-        
-        $(document).ready(function() { 
-        $("#submitBtn").on("click", function (event) {
-            event.preventDefault();
-            //validate form information
-            function validateForm() {
-                const isValid = true;
-                $(".validate").each(function() {
-                    if ($(this).val() === "") {
-                        isValid = false;
-                    }
-                });
 
-                $(".custom-select").each(function() {
-                    if ($(this).val() === "") {
-                        isValid = false;
-                    }
-                });
-                return isValid
-            }
+        $(document).ready(function () {
+            $("#submitBtn").on("click", function (event) {
+                event.preventDefault();
+                //validate form information
+                function validateForm() {
+                    let isValid = true;
+                    $(".validate").each(function () {
+                        if ($(this).val() === "") {
+                            isValid = false;
+                        }
+                    });
 
-            //if all form values are filled
-            if (validateForm() == true) {
-            // Here we grab the form elements
-            const newFriend = {
-                name: $("#name").val().trim(),
-                photo: $("#photo").val().trim(),
-                scores: [
-                    ($("#q1").val()),
-                    ($("#q2").val()),
-                    ($("#q3").val()),
-                    ($("#q4").val()),
-                    ($("#q5").val()),
-                    ($("#q6").val()),
-                    ($("#q7").val()),
-                    ($("#q8").val()),
-                    ($("#q9").val()),
-                    ($("#q10").val()),
-                ]
-            };
-            // This line is the magic. It"s very similar to the standard ajax function we used.
-            // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-            // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-            // depending on if a tables is available or not.
-            const currentURL = window.location.origin; 
-            $.post(currentURL + "/api/friends", newFriend,
-                function (data) {
-                    $("#matchName").text(data.name);
-                    $("#matchPic").attr("src", data.photo)
-                });
+                    $(".custom-select").each(function () {
+                        if ($(this).val() === "") {
+                            isValid = false;
+                        }
+                    });
+                    return isValid
+                }
 
-                //display modal with the match result
-                $('.modal').modal();
+                //if all form values are filled
+                if (validateForm() == true) {
+                    // Here we grab the form elements
+                    const newFriend = {
+                        name: $("#name").val().trim(),
+                        photo: $("#photo").val().trim(),
+                        scores: [
+                            ($("#q1").val()),
+                            ($("#q2").val()),
+                            ($("#q3").val()),
+                            ($("#q4").val()),
+                            ($("#q5").val()),
+                            ($("#q6").val()),
+                            ($("#q7").val()),
+                            ($("#q8").val()),
+                            ($("#q9").val()),
+                            ($("#q10").val()),
+                        ]
+                    };
+                    // This line is the magic. It"s very similar to the standard ajax function we used.
+                    // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+                    // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+                    // depending on if a tables is available or not.
 
-                // Clear the form when submitting
-                $("#name").val(""),
-                    $("#photo").val(""),
-                    $("#q1").val(""),
-                    $("#q2").val(""),
-                    $("#q3").val(""),
-                    $("#q4").val(""),
-                    $("#q5").val(""),
-                    $("#q6").val(""),
-                    $("#q7").val(""),
-                    $("#q8").val(""),
-                    $("#q9").val(""),
-                    $("#q10").val("")
+                    $.post("/api/friends", newFriend,
+                        function (data) {
+                            $("#matchName").text(data.name);
+                            $("#matchPic").attr("src", data.photo)
+                        });
+
+                    //display modal with the match result
+                    $('#myModal').modal('show');
+// Clear the form when submitting
+                    // $("#name").val(""),
+                    //     $("#photo").val(""),
+                    //     $("#q1").val(""),
+                    //     $("#q2").val(""),
+                    //     $("#q3").val(""),
+                    //     $("#q4").val(""),
+                    //     $("#q5").val(""),
+                    //     $("#q6").val(""),
+                    //     $("#q7").val(""),
+                    //     $("#q8").val(""),
+                    //     $("#q9").val(""),
+                    //     $("#q10").val("")
                 } else {
                     alert("Please fill out ALL fields before submitting survey!")
                 }
             });
         });
+ </script>
 
-
-
-    </script>
 </body>
 
 </html>

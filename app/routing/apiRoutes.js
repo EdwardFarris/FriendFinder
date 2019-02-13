@@ -1,4 +1,4 @@
-var friendList = require("../data/friends.js");
+const friendsList = require("../data/friends");
 
 // ===============================================================================
 // ROUTING
@@ -12,7 +12,7 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/friends", function(req, res) {
-    res.json(friendList);
+    res.json(friendsList);
   });
 
   // API POST Requests
@@ -27,17 +27,17 @@ module.exports = function(app) {
     // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body parsing middleware
-    const newFriendScores = req.body.scores;
-    const scoresArray = [];
+    let newFriendScores = req.body.scores;
+    let scoresArray = [];
     // const friendCount = 0;
-    const bestMatch = 0;
+    let bestMatch = 0;
 
     //iterates through all current friends in friendsList
-    for (const i=0; i < friendList.length; i++) {
-      const totalDifference = 0;
+    for (let i = 0; i < friendsList.length; i++) {
+      let totalDifference = 0;
       //iterate through scores to compare friends
-      for ( const j = 0; j < newFriendScores.length; j++) {
-        totalDifference += (Math.abs(parseInt(friendList[i].scores[j]) - parseInt(newFriendScores[j])));
+      for ( let j = 0; j < newFriendScores.length; j++) {
+        totalDifference += (Math.abs(parseInt(friendsList[i].scores[j]) - parseInt(newFriendScores[j])));
       }
 
       //pushes results into scoresArray
@@ -45,21 +45,22 @@ module.exports = function(app) {
     }
    
     //find best match after all friends are compared
-    for (const i = 0; i < scoresArray.length; i++) {
+    for (let i = 0; i < scoresArray.length; i++) {
       if (scoresArray[i] <= scoresArray[bestMatch]) {
         bestMatch = i;
       }
     }
-   
+    
+    //push new submission into friendList Array
+    friendsList.push(req.body);
+    
     //return bestMatch data
-    const newBuddy = friendList[bestMatch];
+    const newBuddy = friendsList[bestMatch];
     res.json(newBuddy);
 
-    //push new submission into friendList Array
-    friendList.push(req.body);
+    
   });
-
-  
+};
 
   // I added this below code so you could clear out the table while working with the functionality.
   // Don"t worry about it!
@@ -71,4 +72,4 @@ module.exports = function(app) {
 
   //   res.json({ ok: true });
   // });
-};
+
