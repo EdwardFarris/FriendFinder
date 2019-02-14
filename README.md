@@ -21,6 +21,7 @@ _____
 5. From the FriendFinder survey-page, users can input their name and a link to their image, then begin answering the 10 questions. All fields are required to be completed in order for a user to be matched with a friend.
 <br>
 _____
+
 ### **Demo Screenshots**
 
 * This is what the home-page looks like!
