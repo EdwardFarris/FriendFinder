@@ -24,16 +24,17 @@ _____
 
 ### **Demo Screenshots**
 
-* This is what the home-page looks like!
+* **This is what the home-page looks like!**
 ![FriendFinder](./home.png)
 
-* This is what the survey page looks like!
+* **This is what the survey page looks like!**
 ![FriendFinder](./survey.png)
 
-* This is what the match modal displays!
+* **This is what the match modal displays!**
 ![FriendFinder](./match.png)
 
 _________
+
 ### **Technologies Used**
 * Node.js
 * Express
@@ -42,6 +43,7 @@ _________
 * Express NPM package (https://www.npmjs.com/package/express)
 * mysql NPM path (https://www.npmjs.com/package/path)<br>
 _____
+
 ### **Built With**
 * Visual Studio Code
 * Terminal/Gitbash
