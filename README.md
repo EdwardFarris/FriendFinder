@@ -22,13 +22,16 @@ _____
 <br>
 _____
 ### **Demo Screenshots**
-#####FriendFinder
+
 * This is what the home-page looks like!
 ![FriendFinder](./home.png)
+
 * This is what the survey page looks like!
 ![FriendFinder](./survey.png)
+
 * This is what the match modal displays!
 ![FriendFinder](./match.png)
+
 _________
 ### **Technologies Used**
 * Node.js
